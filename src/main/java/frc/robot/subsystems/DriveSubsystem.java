@@ -205,12 +205,12 @@ public class DriveSubsystem extends SubsystemBase {
     stepsPerDecisecToMetersPerSec(m_rightMaster.getSelectedSensorVelocity()));
   }
 
-  public static double stepsToMeters(int steps) {
-    return (Constants.DriveConstants.KWheelDiameterMeters / 2048) * steps;
+  public static double stepsToMeters(double d) {
+    return (Constants.DriveConstants.KWheelDiameterMeters / 2048) * d;
   }
 
-  public static double stepsPerDecisecToMetersPerSec(int stepsPerDecisec) {
-    return stepsToMeters(stepsPerDecisec * 10);
+  public static double stepsPerDecisecToMetersPerSec(double d) {
+    return stepsToMeters(d * 10);
   }
   
   /**
