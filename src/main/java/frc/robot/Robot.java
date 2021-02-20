@@ -93,14 +93,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() { 
-    // m_autonomousCommand.execute();
-    if (autoTimer.get() < 0.7) {
-      DriveSub.tankDrive(-0.68, -0.68);
-    } else {
-      DriveSub.tankDrive(0, 0);
-      autoTimer.stop();
-    }
-    System.out.println(autoTimer.get());
 
   }
     

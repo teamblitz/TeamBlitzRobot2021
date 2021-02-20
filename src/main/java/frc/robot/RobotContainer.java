@@ -86,8 +86,8 @@ public class RobotContainer {
     // m_feederArmCommand = new ToggleFeederArmCommand(m_intakeArm);
 
      
-    configureSubsystems();
-    configureButtonBindings();
+    //configureSubsystems();
+    //configureButtonBindings();
     // Tank drive
     if (kUseTankDrive) {
      /* m_robotDrive.setDefaultCommand(
@@ -98,7 +98,7 @@ public class RobotContainer {
                    m_robotDrive));
                    //Get y value of right analog stick. Then set the mmotor speed to a max of 50% when the left trigger is less than half pulled otherwise set the max speed to 100%
     */
-   
+   /*
     m_robotDrive.setDefaultCommand(
      new RunCommand(() -> m_robotDrive
       .tankDrive((m_driveController.getRawAxis(1)),
@@ -106,7 +106,7 @@ public class RobotContainer {
                    m_driveController.getRawAxis(5)),
                    m_robotDrive));
      // .tankDrive(m_driveController.getRawAxis(1), m_driveController.getRawAxis(2));
-      
+      */
                   }
     
     /* else { //arcadeDrive (delete what is in these paranthesis and uncomment the arcadeDrive so you would be left with: arcadeDrive)
