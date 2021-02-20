@@ -9,6 +9,9 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
@@ -16,7 +19,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -43,7 +46,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    // m_robotContainer = new RobotContainer();
+     m_robotContainer = new RobotContainer();
+     
   }
 
   /**
@@ -78,24 +82,24 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    /*m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
-    }*/
-    autoTimer.reset();
-    autoTimer.start();
+    }
+   // autoTimer.reset();
+   // autoTimer.start();
   }
 
   /**
    * This function is called periodically during autonomous.
-   */
+   */ /*
   @Override
   public void autonomousPeriodic() { 
-    // m_autonomousCommand.execute();
-    if (autoTimer.get() < 0.7) {
-      DriveSub.tankDrive(-0.68, -0.68);
+     m_autonomousCommand.execute();
+    if (autoTimer.get() < 4) {
+     DriveSub.tankDrive(-0.68, -0.68);
     } else {
       DriveSub.tankDrive(0, 0);
       autoTimer.stop();
@@ -103,15 +107,14 @@ public class Robot extends TimedRobot {
     System.out.println(autoTimer.get());
 
   }
-    
-    
+    */
 
     
   
 
   @Override
   public void teleopInit() {
-    m_robotContainer = new RobotContainer();
+   // m_robotContainer = new RobotContainer();
 
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to

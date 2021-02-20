@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
@@ -26,6 +28,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.SPI;
 
 //import edu.wpi.first.wpilibj.examples.ramsetecommand.Constants.DriveConstants;
 
@@ -33,7 +36,7 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
   /* Gyro configuration*/
-  private final Gyro m_gyro = new ADXRS450_Gyro();
+  private final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
   /* Odometry class for tracking robot pose*/
   private final DifferentialDriveOdometry m_odometry;
   /* Master Talons */
@@ -45,7 +48,7 @@ public class DriveSubsystem extends SubsystemBase {
   
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
 
-  private final Encoder m_leftEncoder =
+ /* private final Encoder m_leftEncoder =
     new Encoder(
       Constants.DriveConstants.kLeftMasterPort,
       Constants.DriveConstants.kLeftSlavePort,
@@ -58,6 +61,7 @@ public class DriveSubsystem extends SubsystemBase {
       Constants.DriveConstants.kRightSlavePort,
       true //might be false
       );
+  */
   /**
    * Creates a new DriveSubsystem.
    */
@@ -127,18 +131,20 @@ public class DriveSubsystem extends SubsystemBase {
     m_drive.setRightSideInverted(false); // do not change this
 
     // Sets the distance per pulse for the encoders
-    m_leftEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse);
-    m_rightEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse);
+    //m_leftEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse);
+    //m_rightEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse);
     
     resetEncoders();
     m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
+    
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(),
-    m_rightEncoder.getDistance());
+   m_odometry.update(m_gyro.getRotation2d(), m_leftMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse,
+    m_rightMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse);
+    
   }
 
   /**
@@ -179,7 +185,7 @@ public class DriveSubsystem extends SubsystemBase {
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
   }
-
+  
   /**
    * Returns the heading of the robot.
    *
@@ -188,16 +194,25 @@ public class DriveSubsystem extends SubsystemBase {
   public double getHeading() {
     return m_gyro.getRotation2d().getDegrees();
   }
-
+  
    /**
    * Returns the current wheel speeds of the robot.
    *
    * @return The current wheel speeds.
    */
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
+    return new DifferentialDriveWheelSpeeds(stepsPerDecisecToMetersPerSec(m_leftMaster.getSelectedSensorVelocity()),
+    stepsPerDecisecToMetersPerSec(m_rightMaster.getSelectedSensorVelocity()));
   }
 
+  public static double stepsToMeters(int steps) {
+    return (Constants.DriveConstants.KWheelDiameterMeters / 2048) * steps;
+  }
+
+  public static double stepsPerDecisecToMetersPerSec(int stepsPerDecisec) {
+    return stepsToMeters(stepsPerDecisec * 10);
+  }
+  
   /**
    * Resets the odometry to the specified pose.
    *
@@ -207,44 +222,42 @@ public class DriveSubsystem extends SubsystemBase {
     resetEncoders();
     m_odometry.resetPosition(pose, m_gyro.getRotation2d());
   }
-
+  
   /**
    * Resets the drive encoders to currently read a position of 0.
    */
   public void resetEncoders() {
-    m_leftEncoder.reset();
-    m_rightEncoder.reset();
+    m_leftMaster.setSelectedSensorPosition(0, 0, 10); 
+    m_leftMaster.getSensorCollection().setIntegratedSensorPosition(0, 10);
+    m_rightMaster.setSelectedSensorPosition(0, 0, 10); 
+    m_rightMaster.getSensorCollection().setIntegratedSensorPosition(0, 10);
   }
 
-  public Encoder getLeftEncoder() {
-    return m_leftEncoder;
-  }
-
-  public Encoder getRightEncoder() {
-    return m_rightEncoder;
-  }
-
+  /*
     /**
    * Sets the max output of the drive.  Useful for scaling the drive to drive more slowly.
    *
    * @param maxOutput the maximum output to which the drive will be constrained
    */
+  
   public void setMaxOutput(double maxOutput) {
     m_drive.setMaxOutput(maxOutput);
   }
-
+  
   /**
    * Zeroes the heading of the robot.
    */
+
   public void zeroHeading() {
     m_gyro.reset();
   }
-
+  
   /**
    * Returns the turn rate of the robot.
    *
    * @return The turn rate of the robot, in degrees per second
    */
+  
   public double getTurnRate() {
     return -m_gyro.getRate();
   }
