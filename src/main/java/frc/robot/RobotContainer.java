@@ -70,7 +70,7 @@ public class RobotContainer {
   private Joystick m_auxiliaryController;
   
   // Controller Constants:
-  private final boolean kUseTankDrive = true;
+  private final boolean kUseTankDrive = false;
   // Enables TankDrive
   private final double kLowSpeed = 0.5;
   // When trigger not held this is maximum speed
@@ -109,15 +109,15 @@ public class RobotContainer {
       
                   }
     
-    /* else { //arcadeDrive (delete what is in these paranthesis and uncomment the arcadeDrive so you would be left with: arcadeDrive)
+    else { //arcadeDrive 
       m_robotDrive.setDefaultCommand(
           new RunCommand(() -> m_robotDrive
             .arcadeDrive(m_driveController.getY(GenericHID.Hand.kLeft),
                         m_driveController.getX(GenericHID.Hand.kRight)),
                         m_robotDrive));
     }                     
-  }*/
-}
+  }
+
   private void configureSubsystems() {
 
     m_robotDrive = new DriveSubsystem();

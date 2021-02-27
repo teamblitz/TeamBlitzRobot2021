@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 
@@ -31,8 +30,6 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.SPI;
 
 //import edu.wpi.first.wpilibj.examples.ramsetecommand.Constants.DriveConstants;
-
-import edu.wpi.first.wpilibj.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
   /* Gyro configuration*/
@@ -153,11 +150,11 @@ public class DriveSubsystem extends SubsystemBase {
    * @param fwd the commanded forward movement
    * @param rot the commanded rotation
    */
- /* public void arcadeDrive(final double fwd, final double rot) {
+ public void arcadeDrive(final double fwd, final double rot) {
     System.out.println("arcadeDrive");
     m_drive.arcadeDrive(fwd, rot);
   }
-  */
+  
 
   /**
    * Controls the left and right sides of the drive directly with voltages.

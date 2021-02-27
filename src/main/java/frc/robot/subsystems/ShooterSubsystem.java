@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX; //Changed from SRX to FX -- could result in some errors... also check output of motors
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -20,8 +20,8 @@ import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  private final TalonSRX m_shooterMotorTop = new TalonSRX(ShooterConstants.kShooterMotorTopPort);
-  private final TalonSRX m_shooterMotorBottom = new TalonSRX(ShooterConstants.kShooterMotorBottomPort);
+  private final TalonFX m_shooterMotorTop = new TalonFX(ShooterConstants.kShooterMotorTopPort);
+  private final TalonFX m_shooterMotorBottom = new TalonFX(ShooterConstants.kShooterMotorBottomPort);
 
 /*
   private NetworkTableEntry topMotorVelocity = Shuffleboard.getTab("Controls")
