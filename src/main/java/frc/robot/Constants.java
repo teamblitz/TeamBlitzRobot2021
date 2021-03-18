@@ -27,21 +27,21 @@ public final class Constants {
         public static final double kEncoderDistancePerPulse =
         // Distance units will be rotations
         1.0 / (double) kEncoderCPR;
-        
+
         public static final int kShooterMotorTopPort = 5;
         public static final int kShooterMotorBottomPort = 4;
         // Ports the shooters are attatched to.
-        
+
         public static final double kShooterFreeRPS = 5300;
         public static final double kShooterTargetRPS = 4000;
         public static final double kShooterToleranceRPS = 50;
         // How many rotations per second should be achieved.
-        
+
         // These are not real PID gains, and will have to be tuned for your specific robot.
         public static final double kP = 1;
         public static final double kI = 0;
         public static final double kD = 0;
-        
+
         // On a real robot the feedforward constants should be empirically determined; these are
         // reasonable guesses.
         public static final double kSVolts = 0.05;
@@ -57,7 +57,7 @@ public final class Constants {
             1.0 / (double) kEncoderCPR;
 
         public static final int kMotorPort = 35;
-        
+
         public static final double kFreeRPS = 5300;
         public static final double kTargetRPS = 4000;
         public static final double kToleranceRPS = 50;
@@ -73,7 +73,7 @@ public final class Constants {
         public static final double kVVoltSecondsPerRotation = 12.0 / kFreeRPS;      // Should have value 12V at free speed.
     }
 
-    public static final class DriveConstants {     
+    public static final class DriveConstants {
         public static final int kRightMasterPort = 8;
         public static final int kRightSlavePort = 7;
 
@@ -86,7 +86,7 @@ public final class Constants {
 
         public static final double kPDriveVel = 1.36;
 
-        public static final double kTrackwidthMeters = 1.507;
+        public static final double kTrackwidthMeters = 0.69;
         public static final DifferentialDriveKinematics kDriveKinematics =
         new DifferentialDriveKinematics(kTrackwidthMeters);
 
@@ -95,12 +95,12 @@ public final class Constants {
 
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
-        
+
         public static final int kEncoderCPR = 2048; //aaaa
         public static final double KWheelDiameterMeters = 0.1524;
         public static final double kEncoderDistancePerPulse =
             (KWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
-         } 
+         }
 
     public static final class OIConstants {
         public static final int kDriveControllerPort = 0;
