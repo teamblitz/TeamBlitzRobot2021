@@ -45,20 +45,6 @@ public class DriveSubsystem extends SubsystemBase {
   
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
 
- /* private final Encoder m_leftEncoder =
-    new Encoder(
-      Constants.DriveConstants.kLeftMasterPort,
-      Constants.DriveConstants.kLeftSlavePort,
-      false
-      );
-
-  private final Encoder m_rightEncoder =
-    new Encoder(
-      Constants.DriveConstants.kRightMasterPort,
-      Constants.DriveConstants.kRightSlavePort,
-      true //might be false
-      );
-  */
   /**
    * Creates a new DriveSubsystem.
    */
@@ -68,29 +54,6 @@ public class DriveSubsystem extends SubsystemBase {
     m_rightMaster.configFactoryDefault();
     m_leftSlave.configFactoryDefault();
     m_rightSlave.configFactoryDefault();
-
-    // Peak and Nominal Output
-    //m_leftMaster.configPeakOutputForward(1.0);
-    //m_rightMaster.configPeakOutputForward(1.0);
-    // m_leftMaster.configNominalOutputForward(0.1);
-    // m_rightMaster.configNominalOutputForward(0.1);
-
-    // Current Limits
-    // double kStatorCurrentLimit = 35;
-    // double kStatorTriggerThreshold = 40;
-    // double kStatorTriggerThresholdTime = 1.0;
-    // double kSupplyCurrentLimit = 35;
-    // double kSupplyTriggerThreshold = 40;
-    // double kSupplyTriggerThresholdTime = 0.5;
-
-    // m_leftMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, kStatorCurrentLimit, kStatorTriggerThreshold, kStatorTriggerThresholdTime));
-    // m_leftMaster.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, kSupplyCurrentLimit, kSupplyTriggerThreshold, kSupplyTriggerThresholdTime));
-    // m_rightMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, kStatorCurrentLimit, kStatorTriggerThreshold, kStatorTriggerThresholdTime));
-    // m_rightMaster.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, kSupplyCurrentLimit, kSupplyTriggerThreshold, kSupplyTriggerThresholdTime));
-    // m_leftSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, kStatorCurrentLimit, kStatorTriggerThreshold, kStatorTriggerThresholdTime));
-    // m_leftSlave.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, kSupplyCurrentLimit, kSupplyTriggerThreshold, kSupplyTriggerThresholdTime));
-    // m_rightSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, kStatorCurrentLimit, kStatorTriggerThreshold, kStatorTriggerThresholdTime));
-    // m_rightSlave.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, kSupplyCurrentLimit, kSupplyTriggerThreshold, kSupplyTriggerThresholdTime));
 
     // Neutral Mode
     m_leftMaster.setNeutralMode(NeutralMode.Coast);
@@ -151,7 +114,6 @@ public class DriveSubsystem extends SubsystemBase {
    * @param rot the commanded rotation
    */
  public void arcadeDrive(final double fwd, final double rot) {
-    System.out.println("arcadeDrive");
     m_drive.arcadeDrive(fwd, rot);
   }
   
