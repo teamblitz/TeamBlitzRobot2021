@@ -48,7 +48,7 @@ public final class Constants {
         public static final double kVVoltSecondsPerRotation = 12.0 / kShooterFreeRPS;   // Should have value 12V at free speed.
     }
 
-    
+
     public static final class DriveConstants {
         public static final int kRightMasterPort = 8;
         public static final int kRightSlavePort = 7;
@@ -56,18 +56,18 @@ public final class Constants {
         public static final int kLeftMasterPort = 6;
         public static final int kLeftSlavePort = 9;
 
-        public static final double ksVolts = 0.654;
-        public static final double kvVoltsSecondsPerMeter = 6.07;
-        public static final double kaVoltsSecondsSquaredPerMeter = 0.516;
+        public static final double ksVolts = 0.685;
+        public static final double kvVoltsSecondsPerMeter = 1.92;
+        public static final double kaVoltsSecondsSquaredPerMeter = 0.163;
 
-        public static final double kPDriveVel = 1.36;
+        public static final double kPDriveVel = 2.67;
 
-        public static final double kTrackwidthMeters = 0.69;
+        public static final double kTrackwidthMeters = 0.7218;
         public static final DifferentialDriveKinematics kDriveKinematics =
         new DifferentialDriveKinematics(kTrackwidthMeters);
 
-        public static final double kMaxSpeedMetersPerSecond = 30;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 30;
+        public static final double kMaxSpeedMetersPerSecond = 3;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
 
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
