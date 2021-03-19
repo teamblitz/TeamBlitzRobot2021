@@ -22,6 +22,7 @@ import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -102,7 +103,8 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-   m_odometry.update(m_gyro.getRotation2d(), m_leftMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse,
+    m_gyro.getRotation2d();
+    m_odometry.update(Rotation2d.fromDegrees(getHeading()), m_leftMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse,
     m_rightMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse);
 
   }
