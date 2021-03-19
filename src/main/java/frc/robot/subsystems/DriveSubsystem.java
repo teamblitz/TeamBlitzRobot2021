@@ -42,7 +42,7 @@ public class DriveSubsystem extends SubsystemBase {
   /* Slave Talons */
   private final WPI_TalonFX m_leftSlave = new WPI_TalonFX(Constants.DriveConstants.kLeftSlavePort);
   private final WPI_TalonFX m_rightSlave = new WPI_TalonFX(Constants.DriveConstants.kRightSlavePort);
-  
+
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
 
   /**
@@ -64,39 +64,39 @@ public class DriveSubsystem extends SubsystemBase {
     // Make the motors ramp up slowly.
    // m_leftMaster.configOpenloopRamp(1.0, 10); //Fisrt numer is the number of seconds it takes to ramp up and don't touch the second
    // m_rightMaster.configOpenloopRamp(1.0, 10);
-    
-    
+
+
     // *********** PUT NON-TUNABLE PARAMETERS BELOW THIS LINE **********
 
     /**
     * Take our extra motor controllers and have them
-    * follow the Talons updated in arcadeDrive 
+    * follow the Talons updated in arcadeDrive
     */
     m_leftSlave.follow(m_leftMaster);
     m_rightSlave.follow(m_rightMaster);
 
     /**
     * Drive robot forward and make sure all motors spin the correct way.
-    * Toggle booleans accordingly.... 
+    * Toggle booleans accordingly....
     */
     m_leftMaster.setInverted(TalonFXInvertType.Clockwise);          // <<<<<< Adjust this until robot drives forward when stick is forward
     m_rightMaster.setInverted(TalonFXInvertType.CounterClockwise);  // <<<<<< Adjust this until robot drives forward when stick is forward
     m_leftSlave.setInverted(InvertType.FollowMaster);
     m_rightSlave.setInverted(InvertType.FollowMaster);
-    
-    /* diff drive assumes (by default) that 
+
+    /* diff drive assumes (by default) that
       right side must be negative to move forward.
-      Change to 'false' so positive/green-LEDs moves robot forward  
+      Change to 'false' so positive/green-LEDs moves robot forward
     */
     m_drive.setRightSideInverted(false); // do not change this
 
     // Sets the distance per pulse for the encoders
     //m_leftEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse);
     //m_rightEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse);
-    
+
     resetEncoders();
     m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
-    
+
   }
 
   @Override
@@ -104,7 +104,7 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
    m_odometry.update(m_gyro.getRotation2d(), m_leftMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse,
     m_rightMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse);
-    
+
   }
 
   /**
@@ -116,7 +116,7 @@ public class DriveSubsystem extends SubsystemBase {
  public void arcadeDrive(final double fwd, final double rot) {
     m_drive.arcadeDrive(fwd, rot);
   }
-  
+
 
   /**
    * Controls the left and right sides of the drive directly with voltages.
@@ -132,7 +132,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void tankDrive(final double leftSpeed, final double rightSpeed) {
     System.out.println("i am speed");
-    // Instead of calling tankDrive, call set(ControlMode.Velocity, ...) on each master motor directly. 
+    // Instead of calling tankDrive, call set(ControlMode.Velocity, ...) on each master motor directly.
     m_drive.tankDrive(leftSpeed, rightSpeed);
   }
 
@@ -144,16 +144,17 @@ public class DriveSubsystem extends SubsystemBase {
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
   }
-  
+
   /**
    * Returns the heading of the robot.
    *
    * @return the robot's heading in degrees, from -180 to 180
    */
   public double getHeading() {
-    return m_gyro.getRotation2d().getDegrees();
+    // return m_gyro.getRotation2d().getDegrees();
+    return Math.IEEEremainder(m_gyro.getRotation2d().getDegrees(), 360) * (Constants.GyroConstants.kGyroReversed ? -1.0 : 1.0);
   }
-  
+
    /**
    * Returns the current wheel speeds of the robot.
    *
@@ -171,7 +172,7 @@ public class DriveSubsystem extends SubsystemBase {
   public static double stepsPerDecisecToMetersPerSec(double d) {
     return stepsToMeters(d * 10);
   }
-  
+
   /**
    * Resets the odometry to the specified pose.
    *
@@ -181,14 +182,14 @@ public class DriveSubsystem extends SubsystemBase {
     resetEncoders();
     m_odometry.resetPosition(pose, m_gyro.getRotation2d());
   }
-  
+
   /**
    * Resets the drive encoders to currently read a position of 0.
    */
   public void resetEncoders() {
-    m_leftMaster.setSelectedSensorPosition(0, 0, 10); 
+    m_leftMaster.setSelectedSensorPosition(0, 0, 10);
     m_leftMaster.getSensorCollection().setIntegratedSensorPosition(0, 10);
-    m_rightMaster.setSelectedSensorPosition(0, 0, 10); 
+    m_rightMaster.setSelectedSensorPosition(0, 0, 10);
     m_rightMaster.getSensorCollection().setIntegratedSensorPosition(0, 10);
   }
 
@@ -198,11 +199,11 @@ public class DriveSubsystem extends SubsystemBase {
    *
    * @param maxOutput the maximum output to which the drive will be constrained
    */
-  
+
   public void setMaxOutput(double maxOutput) {
     m_drive.setMaxOutput(maxOutput);
   }
-  
+
   /**
    * Zeroes the heading of the robot.
    */
@@ -210,14 +211,14 @@ public class DriveSubsystem extends SubsystemBase {
   public void zeroHeading() {
     m_gyro.reset();
   }
-  
+
   /**
    * Returns the turn rate of the robot.
    *
    * @return The turn rate of the robot, in degrees per second
    */
-  
+
   public double getTurnRate() {
-    return -m_gyro.getRate();
+    return m_gyro.getRate() * (Constants.GyroConstants.kGyroReversed ? -1.0 : 1.0);
   }
 }
