@@ -105,6 +105,10 @@ public final class Constants {
         public static final int kShooterToggleOff = 2;
     }
 
+    public static final class GyroConstants {
+        public static final boolean kGyroReversed = false;
+    }
+
     public static final class FeederSubsystemConstants {
         public static final int kSparkMotorPortIntakeArm = 11;
     }

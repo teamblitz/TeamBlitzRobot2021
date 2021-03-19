@@ -10,8 +10,6 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import com.kauailabs.navx.frc.AHRS;
-
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
@@ -30,7 +28,7 @@ import frc.robot.subsystems.DriveSubsystem;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  
+
   public static final DriveSubsystem DriveSub = new DriveSubsystem();
   private DriveSubsystem m_robotDrive;
   private RobotContainer m_robotContainer;
@@ -47,7 +45,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
      m_robotContainer = new RobotContainer();
-     
+
   }
 
   /**
@@ -83,7 +81,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    
+
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -96,7 +94,7 @@ public class Robot extends TimedRobot {
    * This function is called periodically during autonomous.
    */ /*
   @Override
-  public void autonomousPeriodic() { 
+  public void autonomousPeriodic() {
      m_autonomousCommand.execute();
     if (autoTimer.get() < 4) {
      DriveSub.tankDrive(-0.68, -0.68);
@@ -109,8 +107,8 @@ public class Robot extends TimedRobot {
   }
     */
 
-    
-  
+
+
 
   @Override
   public void teleopInit() {
@@ -131,10 +129,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-   
+
       // .tankDrive(m_driveController.getRawAxis(1), m_driveController.getRawAxis(2));
-       
-                   
+
+
   }
 
   @Override
