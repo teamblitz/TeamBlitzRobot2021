@@ -200,11 +200,11 @@ public class RobotContainer {
       // Create a voltage constraint to ensure we don't accelerate too fast
       var autoVoltageConstraint =
       new DifferentialDriveVoltageConstraint(
-      new SimpleMotorFeedforward(Constants.DriveConstants.ksVolts,
-                                 Constants.DriveConstants.kvVoltsSecondsPerMeter,
-                                 Constants.DriveConstants.kaVoltsSecondsSquaredPerMeter),
-                                 Constants.DriveConstants.kDriveKinematics,
-                                 10);
+        new SimpleMotorFeedforward(Constants.DriveConstants.ksVolts,
+                                   Constants.DriveConstants.kvVoltsSecondsPerMeter,
+                                   Constants.DriveConstants.kaVoltsSecondsSquaredPerMeter),
+        Constants.DriveConstants.kDriveKinematics,
+        10);
       TrajectoryConfig config = new TrajectoryConfig(Constants.DriveConstants.kMaxSpeedMetersPerSecond,
                                                      Constants.DriveConstants.kMaxAccelerationMetersPerSecondSquared)
         // Add kinematics to ensure max speed is actually obeyed

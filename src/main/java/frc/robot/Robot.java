@@ -7,17 +7,9 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -30,11 +22,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   public static final DriveSubsystem DriveSub = new DriveSubsystem();
-  private DriveSubsystem m_robotDrive;
   private RobotContainer m_robotContainer;
-  private XboxController m_driveController;
-
-  private static Timer autoTimer = new Timer();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -86,28 +74,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-   // autoTimer.reset();
-   // autoTimer.start();
   }
-
-  /**
-   * This function is called periodically during autonomous.
-   */ /*
-  @Override
-  public void autonomousPeriodic() {
-     m_autonomousCommand.execute();
-    if (autoTimer.get() < 4) {
-     DriveSub.tankDrive(-0.68, -0.68);
-    } else {
-      DriveSub.tankDrive(0, 0);
-      autoTimer.stop();
-    }
-    System.out.println(autoTimer.get());
-
-  }
-    */
-
-
 
 
   @Override
@@ -129,10 +96,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-
       // .tankDrive(m_driveController.getRawAxis(1), m_driveController.getRawAxis(2));
-
-
   }
 
   @Override
