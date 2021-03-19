@@ -31,8 +31,6 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 
-import frc.robot.subsystems.ColorSensorSubsystem;
-import frc.robot.subsystems.ControlPanelControllerSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.FeederArmSubsystem;
 import frc.robot.subsystems.FeederWheelsSubsystem;
@@ -60,10 +58,6 @@ public class RobotContainer {
 
   //Upper Pulley Subsystem:
   private UpperPulleySubsystem m_upperPulley;
-
-  // Control panel subsystem:
-  private ColorSensorSubsystem m_colorSensor;
-  private ControlPanelControllerSubsystem m_cpController;
 
   // Controllers:
   private XboxController m_driveController;
@@ -128,9 +122,6 @@ public class RobotContainer {
     m_intakeRoller = new FeederWheelsSubsystem();
 
     m_upperPulley = new UpperPulleySubsystem();
-
-    m_colorSensor = new ColorSensorSubsystem();
-    m_cpController = new ControlPanelControllerSubsystem(m_colorSensor);
 
     m_driveController = new XboxController(OIConstants.kDriveControllerPort);
     m_auxiliaryController = new Joystick(OIConstants.kAncillaryControlerPort);

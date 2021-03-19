@@ -48,31 +48,7 @@ public final class Constants {
         public static final double kVVoltSecondsPerRotation = 12.0 / kShooterFreeRPS;   // Should have value 12V at free speed.
     }
 
-    public static final class ControlPanelControllerConstants {
-        public static final int[] kEncoderPorts = new int[]{2, 3};
-        public static final boolean kEncoderReversed = false;
-        public static final int kEncoderCPR = 1024;
-        public static final double kEncoderDistancePerPulse =
-            // Distance units will be rotations
-            1.0 / (double) kEncoderCPR;
-
-        public static final int kMotorPort = 35;
-
-        public static final double kFreeRPS = 5300;
-        public static final double kTargetRPS = 4000;
-        public static final double kToleranceRPS = 50;
-
-        // These are not real PID gains, and will have to be tuned for your specific robot.
-        public static final double kP = 1;
-        public static final double kI = 0;
-        public static final double kD = 0;
-
-        // On a real robot the feedforward constants should be empirically determined; these are
-        // reasonable guesses.
-        public static final double kSVolts = 0.05;
-        public static final double kVVoltSecondsPerRotation = 12.0 / kFreeRPS;      // Should have value 12V at free speed.
-    }
-
+    
     public static final class DriveConstants {
         public static final int kRightMasterPort = 8;
         public static final int kRightSlavePort = 7;
@@ -127,8 +103,6 @@ public final class Constants {
         public static final int kFeederIntakeToggleOff = 4;
         public static final int kShooterToggleButton = 1;
         public static final int kShooterToggleOff = 2;
-       // public static final int kControlPanelSpinToColorButton = 4;
-       // public static final int kControPanelMultiRotationsButton =  5;
     }
 
     public static final class FeederSubsystemConstants {
