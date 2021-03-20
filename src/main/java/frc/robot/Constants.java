@@ -95,12 +95,12 @@ public final class Constants {
         public static final int kFeederArmUpButton = 9;
 
         //Works about the same as the kFeederArmSubsystem, not sure if the button IDs used exist though.
-        public static final int kStopPulley = 4;
-        public static final int kUpperPulleyButtonUp = 5;
-        public static final int kUpperPulleyButtonDown = 6;
-        public static final int kFeederIntakeToggleBack = 12;
-        public static final int kFeederIntakeToggleButton = 3;
-        public static final int kFeederIntakeToggleOff = 4;
+        public static final int kStopPulley = 6;
+        public static final int kUpperPulleyButtonUp = 6;
+        public static final int kUpperPulleyButtonDown = 7;
+        public static final int kFeederIntakeToggleBack = 3;
+        public static final int kFeederIntakeToggleButton = 11;
+        public static final int kFeederIntakeToggleOff = 10;
         public static final int kShooterToggleButton = 1;
         public static final int kShooterToggleOff = 2;
     }

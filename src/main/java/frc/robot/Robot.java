@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
@@ -21,6 +20,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.subsystems.DriveSubsystem;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.SPI;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -37,6 +39,8 @@ public class Robot extends TimedRobot {
   private XboxController m_driveController;
 
   private static Timer autoTimer = new Timer();
+
+  //private final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
 
   /**
    * This function is run when the robot is first started up and should be used for any
