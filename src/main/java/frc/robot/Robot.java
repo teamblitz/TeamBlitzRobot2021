@@ -7,22 +7,14 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.subsystems.DriveSubsystem;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.SPI;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,13 +24,9 @@ import edu.wpi.first.wpilibj.SPI;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  
-  public static final DriveSubsystem DriveSub = new DriveSubsystem();
-  private DriveSubsystem m_robotDrive;
-  private RobotContainer m_robotContainer;
-  private XboxController m_driveController;
 
-  private static Timer autoTimer = new Timer();
+  public static final DriveSubsystem DriveSub = new DriveSubsystem();
+  private RobotContainer m_robotContainer;
 
   //private final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
 
@@ -51,7 +39,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
      m_robotContainer = new RobotContainer();
-     
+
   }
 
   /**
@@ -87,34 +75,13 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    
+
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-   // autoTimer.reset();
-   // autoTimer.start();
   }
 
-  /**
-   * This function is called periodically during autonomous.
-   */ /*
-  @Override
-  public void autonomousPeriodic() { 
-     m_autonomousCommand.execute();
-    if (autoTimer.get() < 4) {
-     DriveSub.tankDrive(-0.68, -0.68);
-    } else {
-      DriveSub.tankDrive(0, 0);
-      autoTimer.stop();
-    }
-    System.out.println(autoTimer.get());
-
-  }
-    */
-
-    
-  
 
   @Override
   public void teleopInit() {
@@ -135,10 +102,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-   
       // .tankDrive(m_driveController.getRawAxis(1), m_driveController.getRawAxis(2));
-       
-                   
   }
 
   @Override

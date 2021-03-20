@@ -187,21 +187,6 @@ public class RobotContainer {
       // new JoystickButton(m_auxiliaryController, OIConstants.kUpperPulleyButtonDown)
       // .whenReleased(new InstantCommand(m_upperPulley::stopPulley, m_upperPulley).beforeStarting (() -> System.out.println("Joystick Button " + OIConstants.kUpperPulleyButtonDown + "Released")));
       //When button 13 is released, the pulley will stop moving
-
-      //   // ***** CONTROL PANEL SYSTEM *****
-      //   // This is of no use for Utah Regional. (Probably)
-      //   new JoystickButton(m_auxiliaryController, OIConstants.kControlPanelSpinToColorButton)
-      //     .whenPressed(new InstantCommand(m_cpController::go, m_cpController).beforeStarting(() -> System.out.println("Joystick Button " + OIConstants.kControlPanelSpinToColorButton + " Pressed")));
-
-      //   new JoystickButton(m_auxiliaryController, OIConstants.kControlPanelSpinToColorButton)
-      //     .whenReleased(new InstantCommand(m_cpController::stop, m_cpController).beforeStarting(() -> System.out.println("Joystick Button " + OIConstants.kControlPanelSpinToColorButton + " Released")));
-
-      //   new JoystickButton(m_auxiliaryController, OIConstants.kControPanelMultiRotationsButton)
-      //     .whenPressed(new InstantCommand(m_cpController::go, m_cpController).beforeStarting(() -> System.out.println("Joystick Button " + OIConstants.kControPanelMultiRotationsButton + " Pressed")));
-
-      //   new JoystickButton(m_auxiliaryController, OIConstants.kControPanelMultiRotationsButton)
-      //     .whenReleased(new InstantCommand(m_cpController::stop, m_cpController).beforeStarting(() -> System.out.println("Joystick Button " + OIConstants.kControPanelMultiRotationsButton + " Released")));
-      //
     }
 
     /**
@@ -215,11 +200,11 @@ public class RobotContainer {
       // Create a voltage constraint to ensure we don't accelerate too fast
       var autoVoltageConstraint =
       new DifferentialDriveVoltageConstraint(
-      new SimpleMotorFeedforward(Constants.DriveConstants.ksVolts,
-                                 Constants.DriveConstants.kvVoltsSecondsPerMeter,
-                                 Constants.DriveConstants.kaVoltsSecondsSquaredPerMeter),
-                                 Constants.DriveConstants.kDriveKinematics,
-                                 10);
+        new SimpleMotorFeedforward(Constants.DriveConstants.ksVolts,
+                                   Constants.DriveConstants.kvVoltsSecondsPerMeter,
+                                   Constants.DriveConstants.kaVoltsSecondsSquaredPerMeter),
+        Constants.DriveConstants.kDriveKinematics,
+        10);
       TrajectoryConfig config = new TrajectoryConfig(Constants.DriveConstants.kMaxSpeedMetersPerSecond,
                                                      Constants.DriveConstants.kMaxAccelerationMetersPerSecondSquared)
         // Add kinematics to ensure max speed is actually obeyed
