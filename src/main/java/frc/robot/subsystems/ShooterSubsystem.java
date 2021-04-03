@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX; //Changed from SRX to FX -- co
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
@@ -23,7 +24,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private final TalonFX m_shooterMotorTop = new TalonFX(ShooterConstants.kShooterMotorTopPort);
   private final TalonFX m_shooterMotorBottom = new TalonFX(ShooterConstants.kShooterMotorBottomPort);
 
-/*
+  private ShuffleboardTab speedcontrols = Shuffleboard.getTab("Controls");
+
   private NetworkTableEntry topMotorVelocity = Shuffleboard.getTab("Controls")
   .add("Top Motor", m_shooterMotorTop.getSelectedSensorVelocity())
 	.withWidget(BuiltInWidgets.kTextView)
@@ -37,7 +39,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	.withPosition(2, 0)
 	.withSize(2, 1)
 	.getEntry();
-*/
+
   public ShooterSubsystem() {
 	m_shooterMotorTop.configFactoryDefault();
 	m_shooterMotorTop.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
@@ -96,53 +98,18 @@ public class ShooterSubsystem extends SubsystemBase {
   public void shoot() {
 	System.out.println("ShooterSubsytem::shoot");
 
-	/*
-	The if/else statement sets the minimum and maximum values (speed) of the motors.
-	-800 is the default maximum value
-	-0 is the default minimum value
-	-The first if and else statement checks if the value is greater than 800. If it is, it will automatically
-	set the motor velocity to 800 (or whatever value is in the parameters).
-	-The second statement (else if/else) checks if the value is less than 0. If it is, it will automatically
-	set the motor velocity to 0 (or whatever value is in the parameters).
-	-This is to make sure someone stupid, aka Sean, will not set the motors to a stupidly high or low value.
-	*/
+	//m_shooterMotorTop.set(ControlMode.Velocity, 750);
+	//m_shooterMotorBottom.set(ControlMode.Velocity, 750);
 
-
-	//m_shooterMotorTop.set(ControlMode.PercentOutput, .88);
-	//m_shooterMotorBottom.set(ControlMode.PercentOutput, .83);
-
-	m_shooterMotorTop.set(ControlMode.Velocity, 750);
-	m_shooterMotorBottom.set(ControlMode.Velocity, 750);
-
-
-	/*if (topMotorVelocity.getDouble(1.0) > 2400) {
-		m_shooterMotorTop.set(ControlMode.Velocity, 2400);
-	} else if (topMotorVelocity.getDouble(1.0) < 0) {
-		m_shooterMotorTop.set(ControlMode.Velocity, 0);
-	} else {
-		m_shooterMotorTop.set(ControlMode.Velocity, 1.0 * topMotorVelocity.getDouble(1.0));
-	}
-
-	if (bottomMotorVelocity.getDouble(1.0) > 2400) {
-		m_shooterMotorBottom.set(ControlMode.Velocity, 2400);
-	} else if (bottomMotorVelocity.getDouble(1.0) < 0) {
-		m_shooterMotorBottom.set(ControlMode.Velocity, 0);
-	} else {
-		m_shooterMotorBottom.set(ControlMode.Velocity, 1.0 * bottomMotorVelocity.getDouble(1.0));
-	}
-	*/
+	m_shooterMotorTop.set(ControlMode.Velocity, 1.0 * topMotorVelocity.getDouble(1.0));
+	m_shooterMotorBottom.set(ControlMode.Velocity, 1.0 * bottomMotorVelocity.getDouble(1.0));
   }
+
   public void stopshooter() {
 	System.out.println("ShooterSubsystem::stop");
 
 	m_shooterMotorTop.set(ControlMode.Velocity, 0);
 	m_shooterMotorBottom.set(ControlMode.Velocity, 0);
-
-
-//	m_shooterMotorTop.set(ControlMode.PercentOutput, 0.0);
-//	m_shooterMotorBottom.set(ControlMode.PercentOutput, 0.0);
-	
-
 
 }
 }
