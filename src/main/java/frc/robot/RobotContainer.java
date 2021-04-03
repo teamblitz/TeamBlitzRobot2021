@@ -106,8 +106,8 @@ public class RobotContainer {
     else { //arcadeDrive
       m_robotDrive.setDefaultCommand(
       new RunCommand(() -> m_robotDrive
-      .arcadeDrive(m_driveController.getY(GenericHID.Hand.kLeft),
-      m_driveController.getX(GenericHID.Hand.kRight)),
+      .arcadeDrive(-m_driveController.getY(GenericHID.Hand.kLeft),
+      -m_driveController.getX(GenericHID.Hand.kRight)),
       m_robotDrive));
     }
   }

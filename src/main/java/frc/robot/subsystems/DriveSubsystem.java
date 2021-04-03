@@ -27,8 +27,9 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+// import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.networktables.NetworkTableEntry;
 
 //import edu.wpi.first.wpilibj.examples.ramsetecommand.Constants.DriveConstants;
 
@@ -45,6 +46,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_rightSlave = new WPI_TalonFX(Constants.DriveConstants.kRightSlavePort);
 
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
+ 
+  //NetworkTableEntry m_xEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("X");
+  //NetworkTableEntry m_yEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("Y");
 
   /**
    * Creates a new DriveSubsystem.
@@ -56,16 +60,40 @@ public class DriveSubsystem extends SubsystemBase {
     m_leftSlave.configFactoryDefault();
     m_rightSlave.configFactoryDefault();
 
+    // Peak and Nominal Output
+    m_leftMaster.configPeakOutputForward(0.8);
+    m_rightMaster.configPeakOutputForward(0.8);
+    m_leftMaster.configNominalOutputForward(0.1);
+    m_rightMaster.configNominalOutputForward(0.1);
+
+    // Current Limits
+    double kStatorCurrentLimit = 35;
+    double kStatorTriggerThreshold = 40;
+    double kStatorTriggerThresholdTime = 1.0;
+    double kSupplyCurrentLimit = 35;
+    double kSupplyTriggerThreshold = 40;
+    double kSupplyTriggerThresholdTime = 0.5;
+
+    m_leftMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, kStatorCurrentLimit, kStatorTriggerThreshold, kStatorTriggerThresholdTime));
+    m_leftMaster.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, kSupplyCurrentLimit, kSupplyTriggerThreshold, kSupplyTriggerThresholdTime));
+    m_rightMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, kStatorCurrentLimit, kStatorTriggerThreshold, kStatorTriggerThresholdTime));
+    m_rightMaster.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, kSupplyCurrentLimit, kSupplyTriggerThreshold, kSupplyTriggerThresholdTime));
+    m_leftSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, kStatorCurrentLimit, kStatorTriggerThreshold, kStatorTriggerThresholdTime));
+    m_leftSlave.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, kSupplyCurrentLimit, kSupplyTriggerThreshold, kSupplyTriggerThresholdTime));
+    m_rightSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, kStatorCurrentLimit, kStatorTriggerThreshold, kStatorTriggerThresholdTime));
+    m_rightSlave.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, kSupplyCurrentLimit, kSupplyTriggerThreshold, kSupplyTriggerThresholdTime));
+
+
     // Neutral Mode
     m_leftMaster.setNeutralMode(NeutralMode.Coast);
     m_rightMaster.setNeutralMode(NeutralMode.Coast);
     m_leftSlave.setNeutralMode(NeutralMode.Coast);
     m_rightSlave.setNeutralMode(NeutralMode.Coast);
 
-    // Make the motors ramp up slowly.
-   // m_leftMaster.configOpenloopRamp(1.0, 10); //Fisrt numer is the number of seconds it takes to ramp up and don't touch the second
-   // m_rightMaster.configOpenloopRamp(1.0, 10);
-
+    // Make the motors ramp up slowly. *** THIS IS BORKEN! USE AT OWN RISK! ***
+    //m_leftMaster.configOpenloopRamp(1.0, 0); //Fisrt numer is the number of seconds it takes to ramp up and don't touch the second
+    //m_rightMaster.configOpenloopRamp(1.0, 0);
+    
 
     // *********** PUT NON-TUNABLE PARAMETERS BELOW THIS LINE **********
 
@@ -106,7 +134,10 @@ public class DriveSubsystem extends SubsystemBase {
     m_gyro.getRotation2d();
     m_odometry.update(Rotation2d.fromDegrees(getHeading()), m_leftMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse,
     m_rightMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse);
-
+   
+    var translation = m_odometry.getPoseMeters().getTranslation();
+    //m_xEntry.setNumber(translation.getX());
+    //m_yEntry.setNumber(translation.getY());
   }
 
   /**
