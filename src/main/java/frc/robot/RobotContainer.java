@@ -197,6 +197,8 @@ public class RobotContainer {
       .whenPressed(new InstantCommand(m_shooter::yellowZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kYellowZone + "Pressed"))); 
     new JoystickButton(m_driveController, OIConstants.kGreenZone)
       .whenPressed(new InstantCommand(m_shooter::greenZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kGreenZone + "Pressed"))); 
+    new JoystickButton(m_driveController, OIConstants.kShuffleboardZone)
+      .whenPressed(new InstantCommand(m_shooter::shuffleboardZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kShuffleboardZone + "Pressed"))); 
     
     }
 

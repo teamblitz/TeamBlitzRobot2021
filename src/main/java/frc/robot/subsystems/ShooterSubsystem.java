@@ -175,6 +175,13 @@ public void greenZone() {
 	SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
 	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
 }
+
+public void shuffleboardZone() {
+	topMotorSpeed = topMotorVelocity.getDouble(1.0);
+	bottomMotorSpeed = bottomMotorVelocity.getDouble(1.0);
+	SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
+	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
+}
 }
 
 	
