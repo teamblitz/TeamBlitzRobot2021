@@ -13,9 +13,12 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX; //Changed from SRX to FX -- could result in some errors... also check output of motors
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
@@ -39,6 +42,35 @@ public class ShooterSubsystem extends SubsystemBase {
 	.withPosition(2, 0)
 	.withSize(2, 1)
 	.getEntry();
+
+	private double topMotorSpeed;
+	private double bottomMotorSpeed;
+
+	/*
+	NetworkTableEntry myBoolean = Shuffleboard.getTab("Example Tab")
+	.getLayout("List", "Example List")
+	.add("My Boolean", false)
+	.withWidget("Toggle Button")
+	.getEntry();
+
+	NetworkTableEntry mySpeed = Shuffleboard.getTab("Example Tab")
+	.add("Bottom Motor", m_shooterMotorBottom.getSelectedSensorVelocity())
+	.withWidget(BuiltInWidgets.kSpeedController)
+	.getEntry();
+	*/
+
+	// ShuffleboardLayout setVelocityCommands = Shuffleboard.getTab("Commands")
+  	// .getLayout("Elevator", BuiltInLayouts.kList)
+	// .withSize(2, 2);	
+
+	//setVelocityCommands.add("RedZone", m_shooterMotorTop.set(ControlMode.Velocity, 750))
+
+	/*public static void redZone() {
+		
+	}
+	*/
+//elevatorCommands.add("PAIN", redZone());
+//elevatorCommands.add(new ElevatorUpCommand());
 
   public ShooterSubsystem() {
 	m_shooterMotorTop.configFactoryDefault();
@@ -101,9 +133,12 @@ public class ShooterSubsystem extends SubsystemBase {
 	//m_shooterMotorTop.set(ControlMode.Velocity, 750);
 	//m_shooterMotorBottom.set(ControlMode.Velocity, 750);
 
-	m_shooterMotorTop.set(ControlMode.Velocity, 1.0 * topMotorVelocity.getDouble(1.0));
-	m_shooterMotorBottom.set(ControlMode.Velocity, 1.0 * bottomMotorVelocity.getDouble(1.0));
-  }
+// 	m_shooterMotorTop.set(ControlMode.Velocity, 1.0 * topMotorVelocity.getDouble(1.0));
+// 	m_shooterMotorBottom.set(ControlMode.Velocity, 1.0 * bottomMotorVelocity.getDouble(1.0));
+
+	m_shooterMotorTop.set(ControlMode.Velocity, topMotorSpeed);
+	m_shooterMotorBottom.set(ControlMode.Velocity, bottomMotorSpeed);
+	}
 
   public void stopshooter() {
 	System.out.println("ShooterSubsystem::stop");
@@ -111,6 +146,41 @@ public class ShooterSubsystem extends SubsystemBase {
 	m_shooterMotorTop.set(ControlMode.Velocity, 0);
 	m_shooterMotorBottom.set(ControlMode.Velocity, 0);
 
+}
+
+public void redZone() {
+	topMotorSpeed = 550.0;
+	bottomMotorSpeed = 550.0;
+	SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
+	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
+}
+
+public void blueZone() {
+	topMotorSpeed = 565.0;	
+	bottomMotorSpeed = 565.0;
+	SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
+	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
+}
+
+public void yellowZone() {
+	topMotorSpeed = 250.0;
+	bottomMotorSpeed = 850.0;
+	SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
+	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
+}
+
+public void greenZone() {
+	topMotorSpeed = 150.0;
+	bottomMotorSpeed = 1200.0;
+	SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
+	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
+}
+
+public void shuffleboardZone() {
+	topMotorSpeed = topMotorVelocity.getDouble(1.0);
+	bottomMotorSpeed = bottomMotorVelocity.getDouble(1.0);
+	SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
+	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
 }
 }
 

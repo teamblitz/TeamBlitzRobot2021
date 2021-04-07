@@ -187,6 +187,19 @@ public class RobotContainer {
       // new JoystickButton(m_auxiliaryController, OIConstants.kUpperPulleyButtonDown)
       // .whenReleased(new InstantCommand(m_upperPulley::stopPulley, m_upperPulley).beforeStarting (() -> System.out.println("Joystick Button " + OIConstants.kUpperPulleyButtonDown + "Released")));
       //When button 13 is released, the pulley will stop moving
+
+     //Zone Controls:
+     new JoystickButton(m_driveController, OIConstants.kRedZone)
+      .whenPressed(new InstantCommand(m_shooter::redZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kRedZone + "Pressed"))); 
+    new JoystickButton(m_driveController, OIConstants.kBlueZone)
+      .whenPressed(new InstantCommand(m_shooter::blueZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kBlueZone + "Pressed"))); 
+    new JoystickButton(m_driveController, OIConstants.kYellowZone)
+      .whenPressed(new InstantCommand(m_shooter::yellowZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kYellowZone + "Pressed"))); 
+    new JoystickButton(m_driveController, OIConstants.kGreenZone)
+      .whenPressed(new InstantCommand(m_shooter::greenZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kGreenZone + "Pressed"))); 
+    new JoystickButton(m_driveController, OIConstants.kShuffleboardZone)
+      .whenPressed(new InstantCommand(m_shooter::shuffleboardZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kShuffleboardZone + "Pressed"))); 
+    
     }
 
     /**

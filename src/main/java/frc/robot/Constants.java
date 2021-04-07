@@ -86,6 +86,13 @@ public final class Constants {
         public static final int kOverdriveLeftTriggerAxis = 2;
         public static final int kOverdriveRightTriggerAxis = 3;
 
+        //Zone Controls:
+        public static final int kGreenZone = 1;
+        public static final int kRedZone = 2;
+        public static final int kBlueZone = 3;
+        public static final int kYellowZone = 4;
+        public static final int kShuffleboardZone = 6;
+
         // Joystick buttons:
         // If you enable the toggle command then it will use one button
         public static final int kFeederArmToggleButton = 11;
