@@ -28,8 +28,8 @@ public final class Constants {
         // Distance units will be rotations
         1.0 / (double) kEncoderCPR;
 
-        public static final int kShooterMotorTopPort = 5;
-        public static final int kShooterMotorBottomPort = 4;
+        public static final int kShooterMotorTopPort = 4;
+        public static final int kShooterMotorBottomPort = 5;
         // Ports the shooters are attatched to.
 
         public static final double kShooterFreeRPS = 5300;
