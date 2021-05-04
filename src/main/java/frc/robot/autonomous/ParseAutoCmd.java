@@ -8,9 +8,10 @@ import frc.robot.subsystems.*;
 
 public class ParseAutoCmd extends SequentialCommandGroup {    
 
-    SubDriveTrain m_SubDriveTrain = new SubDriveTrain();
-    SubFeeder m_SubFeeder = new SubFeeder();
-    SubShooter m_SubShooter = new SubShooter();
+    DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
+    FeederArmSubsystem m_FeederArmSubsystem = new FeederArmSubsystem();
+    FeederWheelsSubsystem m_FeederWheelsSubsystem = new FeederWheelsSubsystem();
+    ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
 
     public SequentialCommandGroup parseAutoCmds () {
         String tempScript;
@@ -67,13 +68,16 @@ public class ParseAutoCmd extends SequentialCommandGroup {
         // NEW SCRIPT COMMANDS ADDED HERE *******************************************************************************
         switch (scriptCommand) {
             case "DT":                        
-                commandList.addCommands(new ScriptDriveTank(m_SubDriveTrain, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
+                commandList.addCommands(new ScriptDriveTank(m_DriveSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
             case "FF":
-                commandList.addCommands(new ScriptFeeder(m_SubFeeder, Float.parseFloat(params[0])));
+                commandList.addCommands(new ScriptFeeder(m_FeederWheelsSubsystem, Float.parseFloat(params[0])));
                 break;
-            case "SH":
-                commandList.addCommands(new ScriptShooter(m_SubShooter, Float.parseFloat(params[0])));
+            case "SHW":
+                commandList.addCommands(new ScriptShooterWheel(m_ShooterSubsystem, Float.parseFloat(params[0])));
+                break;
+            case "SHA":
+                commandList.addCommands(new ScriptShooterArm(m_FeederArmSubsystem, Float.parseFloat(params[0])));
                 break;
             default:
                 throw new IllegalArgumentException("unknown script command : " + scriptCommand);

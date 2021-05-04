@@ -9,8 +9,8 @@ public class ScriptValidator {
     // SH Shooter
 
     // NEW SCRIPT COMMANDS ADDED HERE *******************************************************************************
-    private static final String[] VALID_COMMAND = {"SL", "DT", "FF", "SH"};
-    private static final int[] VALID_PARAMS =     {  1,    3,    1,    1 } ;
+    private static final String[] VALID_COMMAND = {"SL", "DT", "FF", "SHW", "SHA"};
+    private static final int[] VALID_PARAMS =     {  1,    3,    1,    1 ,   1} ;
     // **************************************************************************************************************
 
     public boolean isValid(String scriptString) {
