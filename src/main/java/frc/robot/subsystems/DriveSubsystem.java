@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.Timer;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
@@ -162,6 +165,21 @@ public class DriveSubsystem extends SubsystemBase {
     m_rightMaster.setVoltage(-rightVolts);
     m_drive.feed();
   }
+
+   /**
+   * Controls the left and right sides of the drive directly with voltages and seconds.
+   *
+  //  * @param leftVolts  the commanded left output
+  //  * @param rightVolts the commanded right output
+  //  * @param seconds the commanded amount of seconds
+  //  */
+  // public void tankDriveAuto(double leftVolts, double rightVolts, double seconds) {
+  //   m_leftMaster.setVoltage(leftVolts);
+  //   m_rightMaster.setVoltage(-rightVolts);
+  //   Timer.delay(seconds);
+  //   m_leftMaster.setVoltage(0.0);
+  //   m_rightMaster.setVoltage(0.0);
+  // }
 
   public void tankDrive(final double leftSpeed, final double rightSpeed) {
     System.out.println("i am speed");

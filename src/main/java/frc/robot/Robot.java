@@ -25,7 +25,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  public static final DriveSubsystem DriveSub = new DriveSubsystem();
   private RobotContainer m_robotContainer;
 
   //private final Gyro m_gyro = new AHRS(SPI.Port.kMXP);

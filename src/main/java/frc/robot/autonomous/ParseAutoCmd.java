@@ -3,14 +3,14 @@ package frc.robot.autonomous;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import frc.robot.commands.ScriptDriveTank;
 
 public class ParseAutoCmd extends SequentialCommandGroup {    
 
-    SubDriveTrain m_SubDriveTrain = new SubDriveTrain();
-    SubFeeder m_SubFeeder = new SubFeeder();
-    SubShooter m_SubShooter = new SubShooter();
+    DriveSubsystem m_SubDriveTrain = new DriveSubsystem();
+    FeederArmSubsystem m_SubFeeder = new FeederArmSubsystem();
+    ShooterSubsystem m_SubShooter = new ShooterSubsystem();
 
     public SequentialCommandGroup parseAutoCmds () {
         String tempScript;
@@ -69,12 +69,12 @@ public class ParseAutoCmd extends SequentialCommandGroup {
             case "DT":                        
                 commandList.addCommands(new ScriptDriveTank(m_SubDriveTrain, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
-            case "FF":
-                commandList.addCommands(new ScriptFeeder(m_SubFeeder, Float.parseFloat(params[0])));
-                break;
-            case "SH":
-                commandList.addCommands(new ScriptShooter(m_SubShooter, Float.parseFloat(params[0])));
-                break;
+            // case "FF":
+            //     commandList.addCommands(new upFeeder(m_SubFeeder, Float.parseFloat(params[0])));
+            //     break;
+            // case "SH":
+            //     commandList.addCommands(new ScriptShooter(m_SubShooter, Float.parseFloat(params[0])));
+            //     break;
             default:
                 throw new IllegalArgumentException("unknown script command : " + scriptCommand);
         }    
