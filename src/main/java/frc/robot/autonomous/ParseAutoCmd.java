@@ -8,9 +8,10 @@ import frc.robot.commands.ScriptDriveTank;
 
 public class ParseAutoCmd extends SequentialCommandGroup {    
 
-    DriveSubsystem m_SubDriveTrain = new DriveSubsystem();
-    FeederArmSubsystem m_SubFeeder = new FeederArmSubsystem();
-    ShooterSubsystem m_SubShooter = new ShooterSubsystem();
+    DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
+    FeederArmSubsystem m_FeederArmSubsystem = new FeederArmSubsystem();
+    FeederWheelsSubsystem m_FeederWheelsSubsystem = new FeederWheelsSubsystem();
+    ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
 
     public SequentialCommandGroup parseAutoCmds () {
         String tempScript;
@@ -67,7 +68,7 @@ public class ParseAutoCmd extends SequentialCommandGroup {
         // NEW SCRIPT COMMANDS ADDED HERE *******************************************************************************
         switch (scriptCommand) {
             case "DT":                        
-                commandList.addCommands(new ScriptDriveTank(m_SubDriveTrain, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
+                commandList.addCommands(new ScriptDriveTank(m_DriveSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
             // case "FF":
             //     commandList.addCommands(new upFeeder(m_SubFeeder, Float.parseFloat(params[0])));
