@@ -7,8 +7,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.Timer;
+// import edu.wpi.first.wpilibj2.command.CommandBase;
+// import edu.wpi.first.wpilibj.Timer;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -28,11 +28,11 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 // import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.networktables.NetworkTableEntry;
+//import edu.wpi.first.networktables.NetworkTableEntry;
 
 //import edu.wpi.first.wpilibj.examples.ramsetecommand.Constants.DriveConstants;
 
@@ -138,7 +138,7 @@ public class DriveSubsystem extends SubsystemBase {
     m_odometry.update(Rotation2d.fromDegrees(getHeading()), m_leftMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse,
     m_rightMaster.getSelectedSensorPosition() * Constants.DriveConstants.kEncoderDistancePerPulse);
    
-    var translation = m_odometry.getPoseMeters().getTranslation();
+    //var translation = m_odometry.getPoseMeters().getTranslation();
     //m_xEntry.setNumber(translation.getX());
     //m_yEntry.setNumber(translation.getY());
   }

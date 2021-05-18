@@ -5,13 +5,16 @@ import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.*;
 import frc.robot.commands.ScriptDriveTank;
+import frc.robot.commands.ScriptFeederWheels;
+import frc.robot.commands.ScriptShooter;
+import frc.robot.commands.ScriptUpperPulley;
 
 public class ParseAutoCmd extends SequentialCommandGroup {    
 
     DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
-    FeederArmSubsystem m_FeederArmSubsystem = new FeederArmSubsystem();
     FeederWheelsSubsystem m_FeederWheelsSubsystem = new FeederWheelsSubsystem();
     ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
+    UpperPulleySubsystem m_UpperPulleySubsystem = new UpperPulleySubsystem();
 
     public SequentialCommandGroup parseAutoCmds () {
         String tempScript;
@@ -70,12 +73,15 @@ public class ParseAutoCmd extends SequentialCommandGroup {
             case "DT":                        
                 commandList.addCommands(new ScriptDriveTank(m_DriveSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
-            // case "FF":
-            //     commandList.addCommands(new upFeeder(m_SubFeeder, Float.parseFloat(params[0])));
-            //     break;
-            // case "SH":
-            //     commandList.addCommands(new ScriptShooter(m_SubShooter, Float.parseFloat(params[0])));
-            //     break;
+            case "FF":
+                commandList.addCommands(new ScriptFeederWheels(m_FeederWheelsSubsystem, Float.parseFloat(params[0])));
+                break;
+            case "SH":
+                commandList.addCommands(new ScriptShooter(m_ShooterSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
+                break;
+            case "UP":
+                commandList.addCommands(new ScriptUpperPulley(m_UpperPulleySubsystem, Float.parseFloat(params[0])));
+                break;
             default:
                 throw new IllegalArgumentException("unknown script command : " + scriptCommand);
         }    

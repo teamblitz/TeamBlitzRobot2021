@@ -13,11 +13,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX; //Changed from SRX to FX -- could result in some errors... also check output of motors
 
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+//import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+// import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
+// import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
@@ -27,7 +27,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private final TalonFX m_shooterMotorTop = new TalonFX(ShooterConstants.kShooterMotorTopPort);
   private final TalonFX m_shooterMotorBottom = new TalonFX(ShooterConstants.kShooterMotorBottomPort);
 
-  private ShuffleboardTab speedcontrols = Shuffleboard.getTab("Controls");
+  //private ShuffleboardTab speedcontrols = Shuffleboard.getTab("Controls");
 
   private NetworkTableEntry topMotorVelocity = Shuffleboard.getTab("Controls")
   .add("Top Motor", m_shooterMotorTop.getSelectedSensorVelocity())
@@ -139,6 +139,13 @@ public class ShooterSubsystem extends SubsystemBase {
 	m_shooterMotorTop.set(ControlMode.Velocity, topMotorSpeed);
 	m_shooterMotorBottom.set(ControlMode.Velocity, bottomMotorSpeed);
 	}
+
+	public void shoot(float topPower, float bottomPower) {
+		System.out.println("ShooterSubsytem::shoot");
+	
+		m_shooterMotorTop.set(ControlMode.Velocity, topPower);
+		m_shooterMotorBottom.set(ControlMode.Velocity, bottomPower);
+		}
 
   public void stopshooter() {
 	System.out.println("ShooterSubsystem::stop");

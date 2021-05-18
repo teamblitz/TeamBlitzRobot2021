@@ -66,9 +66,9 @@ public class RobotContainer {
   // Controller Constants:
   private final boolean kUseTankDrive = false;
   // Enables TankDrive
-  private final double kLowSpeed = 0.5;
+  //private final double kLowSpeed = 0.5;
   // When trigger not held this is maximum speed
-  private final double kFullSpeed = 1.0;
+  //private final double kFullSpeed = 1.0;
   // When trigger is held this is maximum speed
   /**
   * The container for the robot. Contains subsystems, OI devices, and commands.
