@@ -7,10 +7,7 @@
 
 package frc.robot.commands;
 
-//import javax.annotation.OverridingMethodsMustInvokeSuper;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.FeederArmSubsystem;
 
 /**
@@ -38,13 +35,6 @@ public class ToggleFeederArmCommand extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("ToggleFeederArmInstantCommmand::initialize");
-    // toggle = !toggle;
-    // if (toggle) {
-    //   m_subsystem.go();
-    // }
-    // else {
-    //   m_subsystem.stop();
-    // }
   }
 
   public void toggle() {

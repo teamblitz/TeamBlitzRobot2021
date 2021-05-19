@@ -42,7 +42,7 @@ public class ScriptShooter extends CommandBase {
     System.out.println(m_seconds);
     m_subsystem.shoot(m_topPower, m_bottomPower);
     Timer.delay(m_seconds);
-    m_subsystem.shoot(0, 0);
+    m_subsystem.shoot(0.0, 0.0);
   }
 
   // Called once the command ends or is interrupted.
