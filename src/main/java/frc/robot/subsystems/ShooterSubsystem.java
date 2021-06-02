@@ -24,19 +24,19 @@ public class ShooterSubsystem extends SubsystemBase {
   private final TalonFX m_shooterMotorTop = new TalonFX(ShooterConstants.kShooterMotorTopPort);
   private final TalonFX m_shooterMotorBottom = new TalonFX(ShooterConstants.kShooterMotorBottomPort);
 
-  private NetworkTableEntry topMotorVelocity = Shuffleboard.getTab("Controls")
-  .add("Top Motor", m_shooterMotorTop.getSelectedSensorVelocity())
-	.withWidget(BuiltInWidgets.kTextView)
-	.withPosition(0, 0)
-	.withSize(2, 1)
-  .getEntry();  
+//   private NetworkTableEntry topMotorVelocity = Shuffleboard.getTab("Controls")
+//   .add("Top Motor", m_shooterMotorTop.getSelectedSensorVelocity())
+// 	.withWidget(BuiltInWidgets.kTextView)
+// 	.withPosition(0, 0)
+// 	.withSize(2, 1)
+//   .getEntry();  
   
-  private NetworkTableEntry bottomMotorVelocity = Shuffleboard.getTab("Controls")
-  .add("Bottom Motor", m_shooterMotorBottom.getSelectedSensorVelocity())
-	.withWidget(BuiltInWidgets.kTextView)
-	.withPosition(2, 0)
-	.withSize(2, 1)
-	.getEntry();
+//   private NetworkTableEntry bottomMotorVelocity = Shuffleboard.getTab("Controls")
+//   .add("Bottom Motor", m_shooterMotorBottom.getSelectedSensorVelocity())
+// 	.withWidget(BuiltInWidgets.kTextView)
+// 	.withPosition(2, 0)
+// 	.withSize(2, 1)
+// 	.getEntry();
 
 	private double topMotorSpeed;
 	private double bottomMotorSpeed;
@@ -178,12 +178,12 @@ public void greenZone() {
 	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
 }
 
-public void shuffleboardZone() {
-	topMotorSpeed = topMotorVelocity.getDouble(1.0);
-	bottomMotorSpeed = bottomMotorVelocity.getDouble(1.0);
-	SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
-	SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
-}
+// public void shuffleboardZone() {
+// 	topMotorSpeed = topMotorVelocity.getDouble(1.0);
+// 	bottomMotorSpeed = bottomMotorVelocity.getDouble(1.0);
+// 	// SmartDashboard.putNumber("Top Motor Velocity", topMotorSpeed);
+// 	// SmartDashboard.putNumber("Bottom Motor Velocity", bottomMotorSpeed);
+// }
 }
 
 	

@@ -36,6 +36,7 @@ import frc.robot.subsystems.FeederArmSubsystem;
 import frc.robot.subsystems.FeederWheelsSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.UpperPulleySubsystem;
+import frc.robot.autonomous.ParseAutoCmd;
 
 /**
 * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -192,8 +193,8 @@ public class RobotContainer {
       .whenPressed(new InstantCommand(m_shooter::yellowZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kYellowZone + "Pressed"))); 
     new JoystickButton(m_driveController, OIConstants.kGreenZone)
       .whenPressed(new InstantCommand(m_shooter::greenZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kGreenZone + "Pressed"))); 
-    new JoystickButton(m_driveController, OIConstants.kShuffleboardZone)
-      .whenPressed(new InstantCommand(m_shooter::shuffleboardZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kShuffleboardZone + "Pressed"))); 
+    // new JoystickButton(m_driveController, OIConstants.kShuffleboardZone)
+    //   .whenPressed(new InstantCommand(m_shooter::shuffleboardZone, m_shooter).beforeStarting(() -> System.out.println("Xbox Button " + OIConstants.kShuffleboardZone + "Pressed"))); 
     
     }
 
@@ -203,55 +204,58 @@ public class RobotContainer {
     * @return the command to run in autonomous
     */
     public Command getAutonomousCommand() {
-      // return new DriveStraightWithDelay(m_robotDrive, 1000, 0.8, 0);  // duration, voltage, delay
+      System.out.println("AUTO run");
+      ParseAutoCmd autoCmdList = new ParseAutoCmd();
+      Command m_autonomousCommand = autoCmdList.parseAutoCmds();
+      return m_autonomousCommand;
+  
+      // // Create a voltage constraint to ensure we don't accelerate too fast
+      // var autoVoltageConstraint =
+      // new DifferentialDriveVoltageConstraint(
+      //   new SimpleMotorFeedforward(Constants.DriveConstants.ksVolts,
+      //                              Constants.DriveConstants.kvVoltsSecondsPerMeter,
+      //                              Constants.DriveConstants.kaVoltsSecondsSquaredPerMeter),
+      //   Constants.DriveConstants.kDriveKinematics,
+      //   10);
+      // TrajectoryConfig config = new TrajectoryConfig(Constants.DriveConstants.kMaxSpeedMetersPerSecond,
+      //                                                Constants.DriveConstants.kMaxAccelerationMetersPerSecondSquared)
+      //   // Add kinematics to ensure max speed is actually obeyed
+      //   .setKinematics(Constants.DriveConstants.kDriveKinematics)
+      //   // Apply the voltage constraint
+      //   .addConstraint(autoVoltageConstraint);
+      //   // An example trajectory to follow.  All units in meters.
+      // Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
+      //   // Start at the origin facing the +X direction
+      //   new Pose2d(0, 0, new Rotation2d(0)),
+      //   // Pass through these two interior waypoints, making an 's' curve path
+      //   List.of(new Translation2d(1, 1),
+      //           new Translation2d(2, -1)),
+      //   // End 3 meters straight ahead of where we started, facing forward
+      //   new Pose2d(3, 0, new Rotation2d(0)),
+      //     // Pass config
+      //     config
+      //   );
+      // RamseteCommand ramseteCommand = new RamseteCommand(
+      //   exampleTrajectory,
+      //   m_robotDrive::getPose,
+      //   new RamseteController(Constants.DriveConstants.kRamseteB, Constants.DriveConstants.kRamseteZeta),
+      //   new SimpleMotorFeedforward(Constants.DriveConstants.ksVolts,
+      //                              Constants.DriveConstants.kvVoltsSecondsPerMeter,
+      //                              Constants.DriveConstants.kaVoltsSecondsSquaredPerMeter),
+      //                              Constants.DriveConstants.kDriveKinematics,
+      //                              m_robotDrive::getWheelSpeeds,
+      //   new PIDController(Constants.DriveConstants.kPDriveVel, 0, 0),
+      //   new PIDController(Constants.DriveConstants.kPDriveVel, 0, 0),
+      //   // RamseteCommand passes volts to the callback
+      //   m_robotDrive::tankDriveVolts,
+      //   m_robotDrive
+      // );
 
-      // Create a voltage constraint to ensure we don't accelerate too fast
-      var autoVoltageConstraint =
-      new DifferentialDriveVoltageConstraint(
-        new SimpleMotorFeedforward(Constants.DriveConstants.ksVolts,
-                                   Constants.DriveConstants.kvVoltsSecondsPerMeter,
-                                   Constants.DriveConstants.kaVoltsSecondsSquaredPerMeter),
-        Constants.DriveConstants.kDriveKinematics,
-        10);
-      TrajectoryConfig config = new TrajectoryConfig(Constants.DriveConstants.kMaxSpeedMetersPerSecond,
-                                                     Constants.DriveConstants.kMaxAccelerationMetersPerSecondSquared)
-        // Add kinematics to ensure max speed is actually obeyed
-        .setKinematics(Constants.DriveConstants.kDriveKinematics)
-        // Apply the voltage constraint
-        .addConstraint(autoVoltageConstraint);
-        // An example trajectory to follow.  All units in meters.
-      Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-        // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1, 1),
-                new Translation2d(2, -1)),
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3, 0, new Rotation2d(0)),
-          // Pass config
-          config
-        );
-      RamseteCommand ramseteCommand = new RamseteCommand(
-        exampleTrajectory,
-        m_robotDrive::getPose,
-        new RamseteController(Constants.DriveConstants.kRamseteB, Constants.DriveConstants.kRamseteZeta),
-        new SimpleMotorFeedforward(Constants.DriveConstants.ksVolts,
-                                   Constants.DriveConstants.kvVoltsSecondsPerMeter,
-                                   Constants.DriveConstants.kaVoltsSecondsSquaredPerMeter),
-                                   Constants.DriveConstants.kDriveKinematics,
-                                   m_robotDrive::getWheelSpeeds,
-        new PIDController(Constants.DriveConstants.kPDriveVel, 0, 0),
-        new PIDController(Constants.DriveConstants.kPDriveVel, 0, 0),
-        // RamseteCommand passes volts to the callback
-        m_robotDrive::tankDriveVolts,
-        m_robotDrive
-      );
+      // // Reset odometry to the starting pose of the trajectory.
+      // m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
-      // Reset odometry to the starting pose of the trajectory.
-      m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
-
-      // Run path following command, then stop at the end.
-      return ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+      // // Run path following command, then stop at the end.
+      // return ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
     }
   }
 

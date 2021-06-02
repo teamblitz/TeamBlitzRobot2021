@@ -12,7 +12,7 @@ import frc.robot.commands.ScriptUpperPulley;
 public class ParseAutoCmd extends SequentialCommandGroup {    
 
     DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
-    FeederWheelsSubsystem m_FeederWheelsSubsystem = new FeederWheelsSubsystem();
+    //FeederWheelsSubsystem m_FeederWheelsSubsystem = new FeederWheelsSubsystem();
     ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
     UpperPulleySubsystem m_UpperPulleySubsystem = new UpperPulleySubsystem();
 
@@ -70,16 +70,20 @@ public class ParseAutoCmd extends SequentialCommandGroup {
 
         // NEW SCRIPT COMMANDS ADDED HERE *******************************************************************************
         switch (scriptCommand) {
-            case "DT":                        
+            case "DT":
+                System.out.println("DT run");                        
                 commandList.addCommands(new ScriptDriveTank(m_DriveSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
             case "FF":
-                commandList.addCommands(new ScriptFeederWheels(m_FeederWheelsSubsystem, Float.parseFloat(params[0])));
+                 System.out.println("FF run");
+                //commandList.addCommands(new ScriptFeederWheels(m_FeederWheelsSubsystem, Float.parseFloat(params[0])));
                 break;
             case "SH":
+                System.out.println("SH run");
                 commandList.addCommands(new ScriptShooter(m_ShooterSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
             case "UP":
+                System.out.println("UP run");
                 commandList.addCommands(new ScriptUpperPulley(m_UpperPulleySubsystem, Float.parseFloat(params[0])));
                 break;
             default:
