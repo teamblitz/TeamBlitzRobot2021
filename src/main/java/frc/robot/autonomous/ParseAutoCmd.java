@@ -23,7 +23,7 @@ public class ParseAutoCmd extends SequentialCommandGroup {
         SequentialCommandGroup autoSeqCommands = new  SequentialCommandGroup();
 
         // get script from shuffleboard, string for now, P implies include the next command in parallel, can have >1 P commands in sequence
-        tempScript = "DT(50,50,4);"; //FF(5)P;SH(5);";
+        tempScript = "DT(50,50,4);FF(5)P;SH(5);";
         // remove whitespace, convert to uppercase
         tempScript = tempScript.replaceAll("\\s+","");
         tempScript.toUpperCase();
@@ -80,7 +80,7 @@ public class ParseAutoCmd extends SequentialCommandGroup {
                 break;
             case "SH":
                 System.out.println("SH run");
-                commandList.addCommands(new ScriptShooter(m_ShooterSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
+                // commandList.addCommands(new ScriptShooter(m_ShooterSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
             case "UP":
                 System.out.println("UP run");

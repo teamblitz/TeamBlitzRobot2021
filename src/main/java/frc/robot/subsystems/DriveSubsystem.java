@@ -40,7 +40,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_rightSlave = new WPI_TalonFX(Constants.DriveConstants.kRightSlavePort);
 
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
- 
+
   //NetworkTableEntry m_xEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("X");
   //NetworkTableEntry m_yEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("Y");
 
@@ -87,7 +87,7 @@ public class DriveSubsystem extends SubsystemBase {
     // Make the motors ramp up slowly. *** THIS IS BORKEN! USE AT OWN RISK! ***
     //m_leftMaster.configOpenloopRamp(1.0, 0); //Fisrt numer is the number of seconds it takes to ramp up and don't touch the second
     //m_rightMaster.configOpenloopRamp(1.0, 0);
-    
+
 
     // *********** PUT NON-TUNABLE PARAMETERS BELOW THIS LINE **********
 
@@ -169,7 +169,6 @@ public class DriveSubsystem extends SubsystemBase {
   // }
 
   public void tankDrive(final double leftSpeed, final double rightSpeed) {
-    System.out.println("i am speed");
     // Instead of calling tankDrive, call set(ControlMode.Velocity, ...) on each master motor directly.
     m_drive.tankDrive(leftSpeed, rightSpeed);
   }
