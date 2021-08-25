@@ -47,9 +47,10 @@ public class ScriptDriveTank extends CommandBase {
     System.out.println(m_seconds);
     System.out.println(m_lPower);
     System.out.println(m_rPower);
-        m_subsystem.tankDrive(m_lPower, m_rPower);
-        Timer.delay(m_seconds);
-        m_subsystem.tankDrive(0, 0);
+    m_subsystem.tankDrive(m_lPower, m_rPower);
+    Timer.delay(m_seconds);
+    System.out.println("Drive Tank (DT) - Finished");
+    m_subsystem.tankDrive(0, 0);
   }
 
   // Called once the command ends or is interrupted.

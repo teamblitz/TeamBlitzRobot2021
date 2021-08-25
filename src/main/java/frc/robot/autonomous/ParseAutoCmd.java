@@ -9,7 +9,7 @@ import frc.robot.commands.ScriptFeederWheels;
 import frc.robot.commands.ScriptShooter;
 import frc.robot.commands.ScriptUpperPulley;
 
-public class ParseAutoCmd extends SequentialCommandGroup {    
+public class ParseAutoCmd extends SequentialCommandGroup {
 
     DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
     //FeederWheelsSubsystem m_FeederWheelsSubsystem = new FeederWheelsSubsystem();
@@ -19,25 +19,25 @@ public class ParseAutoCmd extends SequentialCommandGroup {
     public SequentialCommandGroup parseAutoCmds () {
         String tempScript;
         String[] commands;
-        
+
         SequentialCommandGroup autoSeqCommands = new  SequentialCommandGroup();
 
         // get script from shuffleboard, string for now, P implies include the next command in parallel, can have >1 P commands in sequence
-        tempScript = "DT(50,50,4);FF(5)P;SH(5);";
+        tempScript = "DT(50,50,4);"; //FF(5)P;SH(5);";
         // remove whitespace, convert to uppercase
         tempScript = tempScript.replaceAll("\\s+","");
         tempScript.toUpperCase();
 
 
         ScriptValidator sv = new ScriptValidator();
-        if (!sv.isValid(tempScript)) 
+        if (!sv.isValid(tempScript))
             return null;
 
         // split commands by delimiter
         commands = tempScript.split(";");
 
         for (int i=0; i < commands.length; i++) {
-            
+
             if (commands[i].contains(")P")) {
                 // process parallel commands
                 // Get parallel command group object and add commands for each in parallel command
@@ -53,8 +53,8 @@ public class ParseAutoCmd extends SequentialCommandGroup {
             }
             else {
                 // process sequential command
-                addScriptCommand(autoSeqCommands, commands[i]);                                         
-            } 
+                addScriptCommand(autoSeqCommands, commands[i]);
+            }
         }
         return autoSeqCommands;
     }
@@ -71,7 +71,7 @@ public class ParseAutoCmd extends SequentialCommandGroup {
         // NEW SCRIPT COMMANDS ADDED HERE *******************************************************************************
         switch (scriptCommand) {
             case "DT":
-                System.out.println("DT run");                        
+                System.out.println("DT run");
                 commandList.addCommands(new ScriptDriveTank(m_DriveSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
             case "FF":
@@ -88,7 +88,7 @@ public class ParseAutoCmd extends SequentialCommandGroup {
                 break;
             default:
                 throw new IllegalArgumentException("unknown script command : " + scriptCommand);
-        }    
-        
+        }
+
     }
 }

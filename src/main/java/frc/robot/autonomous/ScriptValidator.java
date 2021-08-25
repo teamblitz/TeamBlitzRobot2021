@@ -9,7 +9,7 @@ public class ScriptValidator {
     // SH Shooter
 
     // NEW SCRIPT COMMANDS ADDED HERE *******************************************************************************
-    private static final String[] VALID_COMMAND = {"SL", "DT", "FF", "SHW", "SHA"};
+    private static final String[] VALID_COMMAND = {"SL", "DT", "FF", "SHW", "SH"};
     private static final int[] VALID_PARAMS =     {  1,    3,    1,    1 ,   1} ;
     // **************************************************************************************************************
 
@@ -22,37 +22,37 @@ public class ScriptValidator {
 
         //Check for valid script
 
-        try {                
+        try {
 
             commands = scriptString.split(";");
 
             for (int i=0; i < commands.length; i++) {
-                // get script command prior to open paren                
+                // get script command prior to open paren
                 scriptCommand = commands[i].substring(0,commands[i].indexOf('('));
-                
+
                 // check for valid script command against valid list
-                if (!(Arrays.asList(VALID_COMMAND).contains(scriptCommand))) {                
+                if (!(Arrays.asList(VALID_COMMAND).contains(scriptCommand))) {
                     System.out.print("invalid script command"+"\n");
                     return false;
                 }
-                
-                paramList = commands[i].substring(commands[i].indexOf('(')+1, commands[i].indexOf(')'));                
+
+                paramList = commands[i].substring(commands[i].indexOf('(')+1, commands[i].indexOf(')'));
                 params = paramList.split(",");
 
                 // check # of parameters for command against valid list
-                if (params.length != VALID_PARAMS[Arrays.asList(VALID_COMMAND).indexOf(scriptCommand)]) {                    
+                if (params.length != VALID_PARAMS[Arrays.asList(VALID_COMMAND).indexOf(scriptCommand)]) {
                     System.out.print("invalid number of parameters "+"\n");
                     return false;
                 }
 
                 //check for non number or blank param
-                for (i=0; i < params.length; i++){
-                    if (!params[i].matches("[0-9]+")) {
+                for (int x=0; x < params.length; x++){
+                    if (!params[x].matches("[0-9]+")) {
                         System.out.print("parameter not a number or missing "+"\n");
                         return false;
                     }
                 }
-                
+
                 // 1 set open and close parens
                 if (commands[i].indexOf('(') < 0 || commands[i].indexOf(')') < 0 ||  commands[i].indexOf('(') > commands[i].indexOf(')')) {
                     System.out.print("mismatching parens "+"\n");
@@ -67,7 +67,7 @@ public class ScriptValidator {
 
                 // check if there is a P, its the last character and its not the last script command
                 pPos = commands[i].indexOf('P');
-                
+
                 if (pPos > 0 && (pPos < commands[i].length()-1 || i >= commands.length-1)) {
                     System.out.print("P placement issue"+ "\n");
                     return false;
