@@ -8,11 +8,12 @@ import frc.robot.commands.ScriptDriveTank;
 import frc.robot.commands.ScriptFeederWheels;
 import frc.robot.commands.ScriptShooter;
 import frc.robot.commands.ScriptUpperPulley;
+import frc.robot.subsystems.FeederWheelsSubsystem;
 
 public class ParseAutoCmd extends SequentialCommandGroup {
 
     DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
-    //FeederWheelsSubsystem m_FeederWheelsSubsystem = new FeederWheelsSubsystem();
+    FeederWheelsSubsystem m_FeederWheelsSubsystem = new FeederWheelsSubsystem();
     ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
     UpperPulleySubsystem m_UpperPulleySubsystem = new UpperPulleySubsystem();
 
@@ -23,7 +24,7 @@ public class ParseAutoCmd extends SequentialCommandGroup {
         SequentialCommandGroup autoSeqCommands = new  SequentialCommandGroup();
 
         // get script from shuffleboard, string for now, P implies include the next command in parallel, can have >1 P commands in sequence
-        tempScript = "DT(50,50,4);FF(5)P;SH(5);";
+        tempScript = "DT(50,50,4);FF(5)P;SH(20,20,4);";
         // remove whitespace, convert to uppercase
         tempScript = tempScript.replaceAll("\\s+","");
         tempScript.toUpperCase();
@@ -76,11 +77,11 @@ public class ParseAutoCmd extends SequentialCommandGroup {
                 break;
             case "FF":
                  System.out.println("FF run");
-                //commandList.addCommands(new ScriptFeederWheels(m_FeederWheelsSubsystem, Float.parseFloat(params[0])));
+                commandList.addCommands(new ScriptFeederWheels(m_FeederWheelsSubsystem, Float.parseFloat(params[0])));
                 break;
             case "SH":
                 System.out.println("SH run");
-                // commandList.addCommands(new ScriptShooter(m_ShooterSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
+               commandList.addCommands(new ScriptShooter(m_ShooterSubsystem, Float.parseFloat(params[0]), Float.parseFloat(params[1]), Float.parseFloat(params[2])));
                 break;
             case "UP":
                 System.out.println("UP run");
