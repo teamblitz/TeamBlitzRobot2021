@@ -7,14 +7,12 @@ package frc.robot.commands;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import edu.wpi.first.wpilibj.Timer;
 
 /** An example command that uses an example subsystem. */
 public class ScriptDriveTank extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_subsystem;
-  private float m_lPower;
-  private float m_rPower;
+  private double m_lPower;
+  private double m_rPower;
   private float m_seconds;
 
   /**
@@ -28,7 +26,7 @@ public class ScriptDriveTank extends CommandBase {
   //  addRequirements(subsystem);
   //}
 
-  public ScriptDriveTank(DriveSubsystem subsystem, float lPower, float rPower, float seconds) {
+  public ScriptDriveTank(DriveSubsystem subsystem, double lPower, double rPower, float seconds) {
     m_lPower = lPower;
     m_rPower = rPower;
     m_seconds = seconds;
@@ -47,19 +45,19 @@ public class ScriptDriveTank extends CommandBase {
     System.out.println(m_seconds);
     System.out.println(m_lPower);
     System.out.println(m_rPower);
-    m_subsystem.tankDrive(m_lPower, m_rPower);
-    Timer.delay(m_seconds);
+    m_subsystem.arcadeDrive(m_lPower, 0);
     System.out.println("Drive Tank (DT) - Finished");
-    m_subsystem.tankDrive(0, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_subsystem.arcadeDrive(0, 0);
+  }
 
   // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+  // @Override
+  // public boolean isFinished() {
+  //  return this.timeSinceInitialized() > m_seconds;
+  // }
 }

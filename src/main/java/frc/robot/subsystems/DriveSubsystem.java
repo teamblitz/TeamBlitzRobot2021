@@ -137,7 +137,11 @@ public class DriveSubsystem extends SubsystemBase {
    * @param rot the commanded rotation
    */
  public void arcadeDrive(final double fwd, final double rot) {
-    m_drive.arcadeDrive(fwd, rot);
+  System.out.println("in arcade drive");
+  System.out.println(fwd);
+  System.out.println(rot);
+  m_drive.arcadeDrive(fwd, rot);
+
   }
 
 
@@ -170,6 +174,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void tankDrive(final double leftSpeed, final double rightSpeed) {
     // Instead of calling tankDrive, call set(ControlMode.Velocity, ...) on each master motor directly.
+    System.out.println("Sppeeds");
+    System.out.println(leftSpeed);
+    System.out.println(rightSpeed);
+   
     m_drive.tankDrive(leftSpeed, rightSpeed);
   }
 
