@@ -13,7 +13,7 @@ public class ScriptDriveTank extends CommandBase {
   private final DriveSubsystem m_subsystem;
   private double m_lPower;
   private double m_rPower;
-  private float m_seconds;
+  private double m_seconds;
 
   /**
    * Creates a new ScriptDriveTank.
@@ -26,7 +26,7 @@ public class ScriptDriveTank extends CommandBase {
   //  addRequirements(subsystem);
   //}
 
-  public ScriptDriveTank(DriveSubsystem subsystem, double lPower, double rPower, float seconds) {
+  public ScriptDriveTank(DriveSubsystem subsystem, double lPower, double rPower, double seconds) {
     m_lPower = lPower;
     m_rPower = rPower;
     m_seconds = seconds;
@@ -41,12 +41,12 @@ public class ScriptDriveTank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.print("Drive Tank (DT) - Seconds: ");
-    System.out.println(m_seconds);
-    System.out.println(m_lPower);
-    System.out.println(m_rPower);
+    // System.out.print("Drive Tank (DT) - Seconds: ");
+    // System.out.println(m_seconds);
+    // System.out.println(m_lPower);
+    // System.out.println(m_rPower);
     m_subsystem.arcadeDrive(m_lPower, 0);
-    System.out.println("Drive Tank (DT) - Finished");
+    // System.out.println("Drive Tank (DT) - Finished");
   }
 
   // Called once the command ends or is interrupted.
@@ -57,7 +57,7 @@ public class ScriptDriveTank extends CommandBase {
 
   // Returns true when the command should end.
   // @Override
-  // public boolean isFinished() {
-  //  return this.timeSinceInitialized() > m_seconds;
+  //public boolean isFinished() {
+  //  return timeSinceInitialized() > m_seconds;
   // }
 }

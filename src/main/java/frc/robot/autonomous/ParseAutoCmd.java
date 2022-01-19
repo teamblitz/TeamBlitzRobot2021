@@ -24,7 +24,7 @@ public class ParseAutoCmd extends SequentialCommandGroup {
         SequentialCommandGroup autoSeqCommands = new  SequentialCommandGroup();
 
         // get script from shuffleboard, string for now, P implies include the next command in parallel, can have >1 P commands in sequence
-        tempScript = "DT(1,1,4);"; // FF(5)P;SH(20,20,4);";
+        tempScript = "DT(9,0,4);"; // FF(5)P;SH(20,20,4);";
         // remove whitespace, convert to uppercase
         tempScript = tempScript.replaceAll("\\s+","");
         tempScript.toUpperCase();
@@ -64,6 +64,7 @@ public class ParseAutoCmd extends SequentialCommandGroup {
         String scriptCommand;
         String paramList;
         String[] params;
+        double x, y, z;
 
         scriptCommand = command.substring(0, command.indexOf('('));
         paramList = command.substring(command.indexOf('(')+1, command.indexOf(')'));
@@ -72,8 +73,15 @@ public class ParseAutoCmd extends SequentialCommandGroup {
         // NEW SCRIPT COMMANDS ADDED HERE *******************************************************************************
         switch (scriptCommand) {
             case "DT":
-                System.out.println("DT run");
-                commandList.addCommands(new ScriptDriveTank(m_DriveSubsystem, Double.parseDouble(params[0]), Double.parseDouble(params[1]), Float.parseFloat(params[2])).withTimeout(4.0));
+            // System.out.println("----------------------------DT run");
+            x = Double.parseDouble(params[0]);
+            y = Double.parseDouble(params[1]);
+            z = Double.parseDouble(params[2]);
+               // System.out.println("------------------"+ params[0]);
+               // System.out.printf("------------------x %f", x);
+                // commandList.addCommands(new ScriptDriveTank(m_DriveSubsystem, Double.parseDouble(params[0]), Double.parseDouble(params[1]), Float.parseFloat(params[2])).withTimeout(4.0));
+               commandList.addCommands(new ScriptDriveTank(m_DriveSubsystem, 9.0, 0.0, 4.0).withTimeout(4.0));
+                
                 break;
             case "FF":
                  System.out.println("FF run");

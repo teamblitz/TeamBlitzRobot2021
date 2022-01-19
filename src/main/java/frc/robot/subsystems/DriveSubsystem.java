@@ -137,9 +137,9 @@ public class DriveSubsystem extends SubsystemBase {
    * @param rot the commanded rotation
    */
  public void arcadeDrive(final double fwd, final double rot) {
-  System.out.println("in arcade drive");
-  System.out.println(fwd);
-  System.out.println(rot);
+  // System.out.println("in arcade drive");
+  // System.out.println(fwd);
+  // System.out.println(rot);
   m_drive.arcadeDrive(fwd, rot);
 
   }
