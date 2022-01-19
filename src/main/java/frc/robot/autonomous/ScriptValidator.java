@@ -47,7 +47,8 @@ public class ScriptValidator {
 
                 //check for non number or blank param
                 for (int x=0; x < params.length; x++){
-                    if (!params[x].matches("[0-9]+")) {
+                    // if (!params[x].matches("[0-9]+")) {     OOPS, we need decimal numbers!
+                    if (!params[x].matches("^([0-9]+\\.?[0-9]*|[0-9]*\\.[0-9]+)$")) {     
                         System.out.print("parameter not a number or missing "+"\n");
                         return false;
                     }
